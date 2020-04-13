@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"strings"
 	"time"
+
+	"github.com/PuerkitoBio/goquery"
 )
 
 func logosym() {
@@ -53,18 +54,40 @@ func vendorList() {
 }
 
 func vendSearch() {
-	var vendor string
+	var (
+		vendor string
+		row    []string
+		rows   [][]string
+	)
 	fmt.Println("[+] Enter Vendor Name: ")
 	fmt.Scanln(&vendor)
 	url, err := http.Get("https://cirt.net/passwords?vendor=" + strings.ToLower(vendor))
 	if err != nil {
 		log.Println(err)
 	}
-	body, err := io.Copy(os.Stdout, url.Body)
+	defer url.Body.Close()
+	content, err := ioutil.ReadAll(url.Body)
 	if err != nil {
 		log.Println(err)
 	}
-	fmt.Println(body)
+	doc, err := goquery.NewDocumentFromReader(strings.NewReader(string(content)))
+	if err != nil {
+		fmt.Println("No URL found!")
+		log.Fatalln(err)
+	}
+	doc.Find("table").Each(func(index int, tablehtml *goquery.Selection) {
+		tablehtml.Find("tr").Each(func(indextr int, rowhtml *goquery.Selection) {
+			rowhtml.Find("th").Each(func(indexth int, tableheading *goquery.Selection) {
+
+			})
+			rowhtml.Find("td").Each(func(indexth int, tablecell *goquery.Selection) {
+				row = append(row, tablecell.Text())
+			})
+			rows = append(rows, row)
+			row = nil
+		})
+	})
+	fmt.Println("Results = ", rows)
 }
 
 // Func displays the options for interacting with vendor database
@@ -95,5 +118,5 @@ func main() {
 	fmt.Println("2. Search default passwords")
 	fmt.Println("3. Exit")
 	menu()
-
+	vendSearch()
 }
