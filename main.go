@@ -25,7 +25,9 @@ func logosym() {
 	fmt.Println("              ░ ░   ░░ ░ ░ ▒ ░░        ░   ▒  ░  ░  ░ ░  ░  ░")
 	fmt.Println("               	 ░    ░ ░               ░  ░     ░       ░ ")
 
-	fmt.Println("Made with ❤ by @iob_j\n\n")
+	fmt.Println("Made with ❤ by @iob_j")
+	fmt.Println("")
+	fmt.Println("")
 	return
 }
 
@@ -87,7 +89,9 @@ func vendSearch() {
 			row = nil
 		})
 	})
-	fmt.Println("Results = ", rows)
+	for _, num := range rows {
+		fmt.Printf("%v\n\t\n", num)
+	}
 }
 
 // Func displays the options for interacting with vendor database
