@@ -38,24 +38,24 @@ var (
 	UWhite  = Color("\033[4;37m%s\033[0m") //  White
 
 	//  Background
-	onBlack  = Color("\033[40m%s\033[0m") //  Black
-	onRed    = Color("\033[41m%s\033[0m") //  Red
-	onGreen  = Color("\033[42m%s\033[0m") //  Green
-	onYellow = Color("\033[43m%s\033[0m") //  Yellow
-	onBlue   = Color("\033[44m%s\033[0m") //  Blue
-	onPurple = Color("\033[45m%s\033[0m") //  Purple
-	onCyan   = Color("\033[46m%s\033[0m") //  Cyan
-	onWhite  = Color("\033[47m%s\033[0m") //  White
+	OnBlack  = Color("\033[40m%s\033[0m") //  Black
+	OnRed    = Color("\033[41m%s\033[0m") //  Red
+	OnGreen  = Color("\033[42m%s\033[0m") //  Green
+	OnYellow = Color("\033[43m%s\033[0m") //  Yellow
+	OnBlue   = Color("\033[44m%s\033[0m") //  Blue
+	OnPurple = Color("\033[45m%s\033[0m") //  Purple
+	OnCyan   = Color("\033[46m%s\033[0m") //  Cyan
+	OnWhite  = Color("\033[47m%s\033[0m") //  White
 
 	//  High Intensty
-	iBlack  = Color("\033[0;90m%s\033[0m") //  Black
-	iRed    = Color("\033[0;91m%s\033[0m") //  Red
-	iGreen  = Color("\033[0;92m%s\033[0m") //  Green
-	iYellow = Color("\033[0;93m%s\033[0m") //  Yellow
-	iBlue   = Color("\033[0;94m%s\033[0m") //  Blue
-	iPurple = Color("\033[0;95m%s\033[0m") //  Purple
-	iCyan   = Color("\033[0;96m%s\033[0m") //  Cyan
-	iWhite  = Color("\033[0;97m%s\033[0m") //  White
+	IBlack  = Color("\033[0;90m%s\033[0m") //  Black
+	IRed    = Color("\033[0;91m%s\033[0m") //  Red
+	IGreen  = Color("\033[0;92m%s\033[0m") //  Green
+	IYellow = Color("\033[0;93m%s\033[0m") //  Yellow
+	IBlue   = Color("\033[0;94m%s\033[0m") //  Blue
+	IPurple = Color("\033[0;95m%s\033[0m") //  Purple
+	ICyan   = Color("\033[0;96m%s\033[0m") //  Cyan
+	IWhite  = Color("\033[0;97m%s\033[0m") //  White
 
 	//  Bold High Intensty
 	BIBlack  = Color("\033[1;90m%s\033[0m") //  Black

@@ -16,17 +16,17 @@ import (
 func logosym() {
 	fmt.Println("")
 	fmt.Println("")
-	fmt.Println("         ▄████ ▒█████  ██▓███  ▄▄▄       ██████  ██████      ")
-	fmt.Println("        ██▒ ▀█▒██▒  ██▓██░  ██▒████▄   ▒██    ▒▒██    ▒      ")
-	fmt.Println("       ▒██░▄▄▄▒██░  ██▓██░ ██▓▒██  ▀█▄ ░ ▓██▄  ░ ▓██▄        ")
-	fmt.Println("       ░▓█  ██▒██   ██▒██▄█▓▒ ░██▄▄▄▄██  ▒   ██▒ ▒   ██▒     ")
-	fmt.Println("        ░▒▓███▀░ ████▓▒▒██▒ ░  ░▓█   ▓██▒██████▒▒██████▒▒    ")
-	fmt.Println("          	░▒   ▒░ ▒░▒░▒░▒▓▒░ ░  ░▒▒   ▓▒█▒ ▒▓▒ ▒ ▒ ▒▓▒ ▒ ░  ")
-	fmt.Println("             ░   ░  ░ ▒ ▒░░▒ ░      ▒   ▒▒ ░ ░▒  ░ ░ ░▒  ░ ░ ")
-	fmt.Println("              ░ ░   ░░ ░ ░ ▒ ░░        ░   ▒  ░  ░  ░ ░  ░  ░")
-	fmt.Println("               	 ░    ░ ░               ░  ░     ░       ░ ")
+	fmt.Println(color.BIBlue("         ▄████ ▒█████  ██▓███  ▄▄▄       ██████  ██████      "))
+	fmt.Println(color.BIBlue("        ██▒ ▀█▒██▒  ██▓██░  ██▒████▄   ▒██    ▒▒██    ▒      "))
+	fmt.Println(color.BIBlue("       ▒██░▄▄▄▒██░  ██▓██░ ██▓▒██  ▀█▄ ░ ▓██▄  ░ ▓██▄        "))
+	fmt.Println(color.BIBlue("       ░▓█  ██▒██   ██▒██▄█▓▒ ░██▄▄▄▄██  ▒   ██▒ ▒   ██▒     "))
+	fmt.Println(color.BIBlue("        ░▒▓███▀░ ████▓▒▒██▒ ░  ░▓█   ▓██▒██████▒▒██████▒▒    "))
+	fmt.Println(color.BIBlue("           ░▒   ▒░ ▒░▒░▒░▒▓▒░ ░  ░▒▒   ▓▒█▒ ▒▓▒ ▒ ▒ ▒▓▒ ▒ ░  "))
+	fmt.Println(color.BIBlue("             ░   ░  ░ ▒ ▒░░▒ ░      ▒   ▒▒ ░ ░▒  ░ ░ ░▒  ░ ░ "))
+	fmt.Println(color.BIBlue("              ░ ░   ░░ ░ ░ ▒ ░░        ░   ▒  ░  ░  ░ ░  ░  ░"))
+	fmt.Println(color.BIBlue("               	 ░    ░ ░               ░  ░     ░       ░ "))
 
-	fmt.Println("Made with" + color.BIRed(" ❤ ") + "by @iob_j")
+	fmt.Println("Made with" + color.BRed(" ❤ ") + "by @iob_j")
 	fmt.Println("")
 	fmt.Println("")
 	return
@@ -56,13 +56,14 @@ func vendorList() {
 	return
 }
 
+// Function to grab vendor data from cirt dot net
 func vendSearch() {
 	var (
 		vendor string
 		row    []string
 		rows   [][]string
 	)
-	fmt.Println(color.BICyan("[+] Enter Vendor Name: "))
+	fmt.Println(color.IYellow("[+] Enter Vendor Name: "))
 	fmt.Scanln(&vendor)
 	url, err := http.Get("https://cirt.net/passwords?vendor=" + strings.ToLower(vendor))
 	if err != nil {
@@ -102,8 +103,9 @@ func menu() {
 	for ok := true; ok; ok = (choice != 3) {
 		n, err := fmt.Scanln(&choice)
 		if n > 1 || err != nil {
-			fmt.Println("[!] invalid input")
-			break
+			fmt.Println(color.BIRed("[!] Invalid input"))
+			fmt.Println(color.BIRed("[!] Entry not found, try again."))
+			continue
 		}
 		switch choice {
 		case 1:
@@ -111,6 +113,7 @@ func menu() {
 		case 2:
 			vendSearch()
 		case 3:
+			fmt.Println(color.BIRed("Exiting GoPass..."))
 			os.Exit(2)
 		}
 	}
@@ -124,5 +127,5 @@ func main() {
 	fmt.Println("2. Search default passwords")
 	fmt.Println("3. Exit")
 	menu()
-	vendSearch()
+
 }
