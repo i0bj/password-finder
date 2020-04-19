@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/color"
 )
 
 func logosym() {
@@ -25,7 +26,7 @@ func logosym() {
 	fmt.Println("              ░ ░   ░░ ░ ░ ▒ ░░        ░   ▒  ░  ░  ░ ░  ░  ░")
 	fmt.Println("               	 ░    ░ ░               ░  ░     ░       ░ ")
 
-	fmt.Println("Made with ❤ by @iob_j")
+	fmt.Println("Made with" + color.BIRed(" ❤ ") + "by @iob_j")
 	fmt.Println("")
 	fmt.Println("")
 	return
@@ -90,7 +91,8 @@ func vendSearch() {
 		})
 	})
 	for _, num := range rows {
-		fmt.Printf("%v\n\t\n", num)
+		//fmt.Printf("%v\n", num)
+		fmt.Println(strings.Trim(fmt.Sprint(num), "[]"))
 	}
 }
 
