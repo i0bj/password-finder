@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/GoPass/color"
 	"github.com/PuerkitoBio/goquery"
-	"github.com/color"
 )
 
 func logosym() {
@@ -36,7 +36,7 @@ func logosym() {
 func internetConnection() {
 	_, err := http.Get("https://cirt.net/")
 	if err != nil {
-		log.Println("[!] No Internet connection...Please check your internet connection.")
+		log.Println(color.BIRed("[!] No Internet connection...Please check your internet connection."))
 		time.Sleep(3 * time.Second)
 		os.Exit(2)
 	} else {
@@ -62,7 +62,7 @@ func vendSearch() {
 		row    []string
 		rows   [][]string
 	)
-	fmt.Println("[+] Enter Vendor Name: ")
+	fmt.Println(color.BICyan("[+] Enter Vendor Name: "))
 	fmt.Scanln(&vendor)
 	url, err := http.Get("https://cirt.net/passwords?vendor=" + strings.ToLower(vendor))
 	if err != nil {
