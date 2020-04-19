@@ -86,8 +86,3 @@ func Color(colorString string) func(...interface{}) string {
 	}
 	return sprint
 }
-
-// Test colors by changing the color method
-func main() {
-	fmt.Println(OnIYellow("hello, world!"))
-}
