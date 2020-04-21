@@ -42,7 +42,7 @@ func internetConnection() {
 	} else {
 		fmt.Println("[+] Checking Internet connection...")
 		time.Sleep(1 * time.Second)
-		fmt.Println("[+] Connected to the database.\n", "---------------------------------") //decide to leave this or not, too much bloat
+		fmt.Println("[+] Connected to the database.\n", "---------------------------------")
 	}
 }
 
