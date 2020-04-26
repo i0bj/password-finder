@@ -92,7 +92,6 @@ func vendSearch() {
 		})
 	})
 	for _, num := range rows {
-		//fmt.Printf("%v\n", num)
 		fmt.Println(strings.Trim(fmt.Sprint(num), "[]"))
 	}
 }
