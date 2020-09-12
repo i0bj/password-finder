@@ -117,6 +117,18 @@ func vendSearch() {
 	for _, num := range rows {
 		fmt.Println(strings.Trim(fmt.Sprint(num), "[]"))
 	}
+	var answer string
+	fmt.Println("\nReturn to menu? yes or no")
+	fmt.Scanln(&answer)
+	if answer == "yes" {
+		fmt.Println("1. List of vendors")
+		fmt.Println("2. Search default passwords")
+		fmt.Println("3. Exit")
+		menu()
+	} else {
+		os.Exit(1)
+	}
+
 }
 
 // Func displays the options for interacting with vendor database
