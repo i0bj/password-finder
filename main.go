@@ -66,7 +66,7 @@ func vendorList() {
 	}
 	fmt.Println(string(vendList))
 	var answer string
-	fmt.Println("Return to main menu? yes or no")
+	fmt.Println("Return to menu? yes or no")
 	fmt.Scanln(&answer)
 	if answer == "yes" {
 		fmt.Println("1. List of vendors")
