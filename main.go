@@ -6,37 +6,49 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 	"time"
 
-	"github.com/GoPass/color"
 	"github.com/PuerkitoBio/goquery"
 )
 
 func logosym() {
 	fmt.Println("")
 	fmt.Println("")
-	fmt.Println(color.BIBlue("         ▄████ ▒█████  ██▓███  ▄▄▄       ██████  ██████      "))
-	fmt.Println(color.BIBlue("        ██▒ ▀█▒██▒  ██▓██░  ██▒████▄   ▒██    ▒▒██    ▒      "))
-	fmt.Println(color.BIBlue("       ▒██░▄▄▄▒██░  ██▓██░ ██▓▒██  ▀█▄ ░ ▓██▄  ░ ▓██▄        "))
-	fmt.Println(color.BIBlue("       ░▓█  ██▒██   ██▒██▄█▓▒ ░██▄▄▄▄██  ▒   ██▒ ▒   ██▒     "))
-	fmt.Println(color.BIBlue("        ░▒▓███▀░ ████▓▒▒██▒ ░  ░▓█   ▓██▒██████▒▒██████▒▒    "))
-	fmt.Println(color.BIBlue("           ░▒   ▒░ ▒░▒░▒░▒▓▒░ ░  ░▒▒   ▓▒█▒ ▒▓▒ ▒ ▒ ▒▓▒ ▒ ░  "))
-	fmt.Println(color.BIBlue("             ░   ░  ░ ▒ ▒░░▒ ░      ▒   ▒▒ ░ ░▒  ░ ░ ░▒  ░ ░ "))
-	fmt.Println(color.BIBlue("              ░ ░   ░░ ░ ░ ▒ ░░        ░   ▒  ░  ░  ░ ░  ░  ░"))
-	fmt.Println(color.BIBlue("               	 ░    ░ ░               ░  ░     ░       ░ "))
+	fmt.Println("         ▄████ ▒█████  ██▓███  ▄▄▄       ██████  ██████      ")
+	fmt.Println("        ██▒ ▀█▒██▒  ██▓██░  ██▒████▄   ▒██    ▒▒██    ▒      ")
+	fmt.Println("       ▒██░▄▄▄▒██░  ██▓██░ ██▓▒██  ▀█▄ ░ ▓██▄  ░ ▓██▄        ")
+	fmt.Println("       ░▓█  ██▒██   ██▒██▄█▓▒ ░██▄▄▄▄██  ▒   ██▒ ▒   ██▒     ")
+	fmt.Println("        ░▒▓███▀░ ████▓▒▒██▒ ░  ░▓█   ▓██▒██████▒▒██████▒▒    ")
+	fmt.Println("           ░▒   ▒░ ▒░▒░▒░▒▓▒░ ░  ░▒▒   ▓▒█▒ ▒▓▒ ▒ ▒ ▒▓▒ ▒ ░  ")
+	fmt.Println("             ░   ░  ░ ▒ ▒░░▒ ░      ▒   ▒▒ ░ ░▒  ░ ░ ░▒  ░ ░ ")
+	fmt.Println("              ░ ░   ░░ ░ ░ ▒ ░░        ░   ▒  ░  ░  ░ ░  ░  ░")
+	fmt.Println("               	 ░    ░ ░               ░  ░     ░       ░ ")
 
-	fmt.Println("Made with" + color.BRed(" ❤ ") + "by @iob_j")
+	fmt.Println("Made with" + " ❤ " + "by @iob_j")
 	fmt.Println("")
 	fmt.Println("")
 	return
+}
+
+// goroutine to capture input from user to exit program.
+func programExit() {
+	c := make(chan os.Signal)
+	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+	go func() {
+		<-c
+		fmt.Println("\r[!] Ctrl+C pressed. Program exiting..")
+		os.Exit(0)
+	}()
 }
 
 // Function to test connection to pasword site.
 func internetConnection() {
 	_, err := http.Get("https://cirt.net/")
 	if err != nil {
-		log.Println(color.BIRed("[!] No Internet connection...Please check your internet connection."))
+		log.Println("[!] No Internet connection...Please check your internet connection.")
 		time.Sleep(3 * time.Second)
 		os.Exit(2)
 	} else {
@@ -63,7 +75,7 @@ func vendSearch() {
 		row    []string
 		rows   [][]string
 	)
-	fmt.Println(color.IYellow("[+] Enter Vendor Name: "))
+	fmt.Println("[+] Enter Vendor Name: ")
 	fmt.Scanln(&vendor)
 	url, err := http.Get("https://cirt.net/passwords?vendor=" + strings.ToLower(vendor))
 	if err != nil {
@@ -102,8 +114,8 @@ func menu() {
 	for ok := true; ok; ok = (choice != 3) {
 		n, err := fmt.Scanln(&choice)
 		if n > 1 || err != nil {
-			fmt.Println(color.BIRed("[!] Invalid input"))
-			fmt.Println(color.BIRed("[!] Entry not found, try again."))
+			fmt.Println("[!] Invalid input")
+			fmt.Println("[!] Entry not found, try again.")
 			continue
 		}
 		switch choice {
@@ -112,13 +124,14 @@ func menu() {
 		case 2:
 			vendSearch()
 		case 3:
-			fmt.Println(color.BIRed("Exiting GoPass..."))
+			fmt.Println("Exiting GoPass...")
 			os.Exit(2)
 		}
 	}
 }
 
 func main() {
+	programExit()
 	logosym()
 	internetConnection()
 
