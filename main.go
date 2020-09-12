@@ -65,7 +65,18 @@ func vendorList() {
 		panic(err)
 	}
 	fmt.Println(string(vendList))
-	return
+	var answer string
+	fmt.Println("Return to main menu? yes or no")
+	fmt.Scanln(&answer)
+	if answer == "yes" {
+		fmt.Println("1. List of vendors")
+		fmt.Println("2. Search default passwords")
+		fmt.Println("3. Exit")
+		menu()
+	} else {
+		os.Exit(1)
+	}
+
 }
 
 // Function to grab vendor data from cirt dot net
